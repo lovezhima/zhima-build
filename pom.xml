@@ -36,17 +36,20 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <servlet-api.version>4.0.1</servlet-api.version>
+        <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
 
         <!--tools-->
         <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
         <testng.version>7.5</testng.version>
         <lombok.version>1.18.24</lombok.version>
+        <guava.version>32.1.1-jre</guava.version>
         <htool.version>1.3.4</htool.version>
         <junit.version>4.13.2</junit.version>
         <hutool-all.version>5.8.18</hutool-all.version>
         <apache-common-lang3.version>3.12.0</apache-common-lang3.version>
-
+        <redisson.version>3.23.1</redisson.version>
+        <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <!--Database or ORM-->
         <mysql.version>8.0.16</mysql.version>
         <mybatis.version>3.0.2</mybatis.version>
@@ -70,10 +73,15 @@
             <version>${lombok.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool-all.version}</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>cn.hutool</groupId>-->
+        <!--            <artifactId>hutool-all</artifactId>-->
+        <!--            <version>${hutool-all.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -102,18 +110,30 @@
     <!--依赖管理,可选择依赖-->
     <dependencyManagement>
         <dependencies>
-            <!--Servlet API-->
+            <!--  Java配置 -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
                 <scope>provided</scope>
             </dependency>
+            <!--Java17 改名为jakarta-->
             <dependency>
                 <groupId>jakarta.servlet</groupId>
                 <artifactId>jakarta.servlet-api</artifactId>
                 <version>${jakarta.servlet-api.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <!--Java9 使用模块化依赖-->
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
             </dependency>
 
             <!-- Database or ORM-->
@@ -121,16 +141,6 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <groupId>mysql</groupId>
                 <version>${mysql.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
             </dependency>
 
             <!--SpringBoot dependencies-->
@@ -140,6 +150,23 @@
                 <version>${spring-boot-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
 
             <!--SpringCloud dependencies-->
@@ -157,7 +184,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--第三方依赖-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
