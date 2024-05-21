@@ -21,7 +21,8 @@
     </developers>
 
     <modules>
-<!--        <module>zhima-dependencies-bom</module>-->
+        <module>zhima-boot-starter-parent</module>
+        <module>zhima-dependencies-bom</module>
     </modules>
 
     <!--常量属性配置-->
